@@ -7,11 +7,13 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie"
 
 import Spinner from "../components/spinner";
+import NormalLayout from "../layout/normal";
+import AuthLayout from "../layout/auth";
 
 const PrivateRoute = (props) => {
   const navigate = useNavigate();
 
-  if(!Cookies.get("js_user_data")){
+  if(!Cookies.get("js_user_token")){
     navigate(routesUrl.login)
   }
   return props.children;
@@ -40,18 +42,14 @@ const RouterComponent = (props) => {
         <Route
           path="/"
           element={
-            <>
+            <NormalLayout>
               <Outlet />
-            </>
+            </NormalLayout>
           }
         >
           <Route
             index
             element={<SunspenseWrap><HomePage /></SunspenseWrap>}
-          />
-          <Route
-            path={"login"}
-            element={<SunspenseWrap><LoginPage /></SunspenseWrap>}
           />
           <Route
             path={"about"}
@@ -65,14 +63,6 @@ const RouterComponent = (props) => {
             path={"login"}
             element={
               <SunspenseWrap><LoginPage /></SunspenseWrap>}
-          />
-          <Route
-            path={"registration"}
-            element={
-              <SunspenseWrap>
-                <RegistrationPage />
-              </SunspenseWrap>
-            }
           />
           <Route path={"cart"} element={<PrivateRoute ><Outlet /></PrivateRoute>}>
             <Route
@@ -89,9 +79,14 @@ const RouterComponent = (props) => {
               index
               element={
                 <SunspenseWrap>
-                  <CheckoutPage />
+                  <Outlet />
                 </SunspenseWrap>
               }
+            />
+            <Route
+              index
+              element={
+                <SunspenseWrap><CheckoutPage /></SunspenseWrap>}
             />
             <Route
               path={"thank-you"}
@@ -109,6 +104,27 @@ const RouterComponent = (props) => {
               }
             />
           </Route>
+        </Route>
+        <Route
+          path="/auth/"
+          element={
+            <AuthLayout>
+              <Outlet />
+            </AuthLayout>
+          }
+        >
+          <Route
+            path={"login"}
+            element={<SunspenseWrap><LoginPage /></SunspenseWrap>}
+          />
+          <Route
+            path={"registration"}
+            element={
+              <SunspenseWrap>
+                <RegistrationPage />
+              </SunspenseWrap>
+            }
+          />
         </Route>
       </Routes>
     </>
