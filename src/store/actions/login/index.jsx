@@ -6,7 +6,11 @@ import {
   LOGIN_USER_ERROR,
   ADD_USER_REQUEST,
   ADD_USER_SUCCESS,
-  ADD_USER_ERROR
+  ADD_USER_ERROR,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_ERROR,
+  RESET_LOGIN_USER_STATE
 } from "./login.types";
 
 // Users action
@@ -23,6 +27,9 @@ export const loginUser = (data) => async (dispatch) => {
     }
   );
 };
+export const resetLoginUserState = () => async (dispatch) => {
+  dispatch({ type: RESET_LOGIN_USER_STATE });
+}
 
 export const registerUser = (data) => async (dispatch) => {
   dispatch({ type: ADD_USER_REQUEST });
@@ -33,6 +40,20 @@ export const registerUser = (data) => async (dispatch) => {
     },
     (error) => {
       dispatch({ type: ADD_USER_ERROR, payload: error.response.data  });
+      console.error("err", error);
+    }
+  );
+};
+
+export const fetchUserData = (data) => async (dispatch) => {
+  dispatch({ type: GET_USER_REQUEST });
+  const url = `auth/profile`;
+  request("get", url, "", true).then(
+    (res) => {
+      dispatch({ type: GET_USER_SUCCESS, payload: res });
+    },
+    (error) => {
+      dispatch({ type: GET_USER_ERROR, payload: error.response.data  });
       console.error("err", error);
     }
   );

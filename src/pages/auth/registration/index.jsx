@@ -33,13 +33,9 @@ const RegistrationPage = (props) => {
     onSubmit: (values) => {
       let data = {
         email:values.email,
-        username:values.userName,
         password:values.password,
-        name:{
-            firstname:values.firstName,
-            lastname:values.lastName
-        },
-        phone:values.phone
+        name:values.firstName+" "+values.lastName,
+        avatar:"https://api.lorem.space/image/face?w=640&h=480"
       }
       dispatch(registerUser(data));
       console.log("values",values)
@@ -108,34 +104,6 @@ const RegistrationPage = (props) => {
             onBlur={formik.handleBlur}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="phone"
-            label="Phone No"
-            name="phone"
-            autoComplete="phone"
-            autoFocus
-            value={formik.values.phone}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.phone && Boolean(formik.errors.phone)}
-            helperText={formik.touched.phone && formik.errors.phone}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="userName"
-            label="User Name"
-            id="userName"
-            value={formik.values.userName}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.userName && Boolean(formik.errors.userName)}
-            helperText={formik.touched.userName && formik.errors.userName}
           />
           <TextField
             margin="normal"

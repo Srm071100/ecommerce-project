@@ -2,25 +2,40 @@ import React, { useEffect } from "react";
 import {Typography,Link,Grid,Box,Paper,Avatar,Button,CssBaseline,TextField,FormControlLabel,Checkbox} from '@mui/material';
 import routesUrl from "../../../routes/routes-url";
 import { useFormik } from 'formik';
-import { loginUser } from "../../../store/actions/login";
+import { loginUser ,fetchUserData,resetLoginUserState } from "../../../store/actions/login";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
 
 const LoginPage = (props) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
   const {
     loginUserLoading,
     loginUserSuccess,
     loginUserError,
-    loginUserData
+    loginUserData,
+    getUserLoading,
+    getUserSuccess,
+    getUserError,
+    getUserData
   } = useSelector((state) => {
     return state.login;
   });
   useEffect(() => {
-    if(loginUserSuccess&&loginUserData&& loginUserData.token) {
-      Cookies.set("js_user_token",loginUserData.token)
+    if(loginUserSuccess &&  loginUserData && loginUserData.access_token) {
+      Cookies.set("js_user_token",loginUserData.access_token);
+      dispatch(fetchUserData());
+      dispatch(resetLoginUserState())
     }
   },[loginUserSuccess,loginUserData])
+  useEffect(() => {
+    if(getUserSuccess &&  getUserData) {
+      Cookies.set("js_user_data",JSON.stringify(getUserData));
+      navigate("/")
+    }
+  },[getUserSuccess,getUserData])
   function Copyright(props) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -37,7 +52,7 @@ const LoginPage = (props) => {
     initialValues: {},
     onSubmit: (values) => { 
       let data = {
-        username:values.username,
+        email:values.username,
         password:values.password
       }
       dispatch(loginUser(data));
@@ -100,14 +115,15 @@ const LoginPage = (props) => {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
+          <LoadingButton 
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            loading={loginUserLoading || getUserLoading}
           >
             Sign In
-          </Button>
+          </LoadingButton >
           <Grid container>
             <Grid item>
             Don't have an account?

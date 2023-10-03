@@ -4,7 +4,11 @@ import {
   LOGIN_USER_ERROR ,
   ADD_USER_REQUEST,
   ADD_USER_SUCCESS,
-  ADD_USER_ERROR
+  ADD_USER_ERROR,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_ERROR,
+  RESET_LOGIN_USER_STATE
 } from '../actions/login/login.types';
 
 const initialState = {
@@ -16,6 +20,10 @@ const initialState = {
   addUserSuccess: false,
   addUserError: false,
   addUserData: {},
+  getUserLoading: false,
+  getUserSuccess: false,
+  getUserError: false,
+  getUserData: {},
 };
 
 export default function (state = initialState, action) {
@@ -44,6 +52,14 @@ export default function (state = initialState, action) {
         loginUserError: true,
         loginUserData:action.payload,
       };
+    case RESET_LOGIN_USER_STATE:
+      return {
+        ...state,
+        loginUserLoading: false,
+        loginUserSuccess: false,
+        loginUserError: false,
+        loginUserData: {},
+      }
     case ADD_USER_REQUEST:
       return {
         ...state,
@@ -67,6 +83,30 @@ export default function (state = initialState, action) {
         addUserSuccess: false,
         addUserError: true,
         addUserData:action.payload,
+      };
+    case GET_USER_REQUEST:
+      return {
+        ...state,
+        getUserLoading: true,
+        getUserSuccess: false,
+        getUserError: false,
+        getUserData:{},
+      };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        getUserLoading: false,
+        getUserSuccess: true,
+        getUserError: false,
+        getUserData:action.payload,
+      };
+    case GET_USER_ERROR:
+      return {
+        ...state,
+        getUserLoading: false,
+        getUserSuccess: false,
+        getUserError: true,
+        getUserData:action.payload,
       };
     default:
       return state;

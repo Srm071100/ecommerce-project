@@ -1,12 +1,13 @@
 import Axios from "axios";
+import Cookies from "js-cookie";
 
 export const request = async (method, path, requestBody, isAuth, isBlob) => {
   let config = {
     method,
-    url: `https://fakestoreapi.com/` + path,
+    url: `https://api.escuelajs.co/api/v1/` + path,
   };
   if (isAuth) {
-    const token = "fgdgddrgfgdf";
+    const token = Cookies.get("js_user_token");
     config.headers = {
       Authorization: `Bearer ${token}`,
     };
