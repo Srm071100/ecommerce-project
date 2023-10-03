@@ -12,11 +12,13 @@ import AuthLayout from "../layout/auth";
 
 const PrivateRoute = (props) => {
   const navigate = useNavigate();
-
-  if(!Cookies.get("js_user_token")){
-    navigate(routesUrl.login)
-  }
-  return props.children;
+  useEffect(() => {
+    if(!Cookies.get("js_user_token")){
+      navigate(routesUrl.login)
+    }
+  },[Cookies.get("js_user_token")])
+  
+  return <>{props.children}</>;
 };
 
 const SunspenseWrap = ({ children }) => {
@@ -29,6 +31,8 @@ const RegistrationPage = lazy(() => import("../pages/auth/registration"));
 
 const HomePage = lazy(() =>  import("../pages/home"));
 const AboutPage = lazy(() => import("../pages/about"));
+const ProductPage = lazy(() => import("../pages/product"));
+const SingleProductPage = lazy(() => import("../pages/product/single-product"));
 const ContactUsPage = lazy(() => import("../pages/contact-us"));
 const CartPage = lazy(() => import("../pages/cart"));
 const CheckoutPage = lazy(() => import("../pages/checkout"));
@@ -51,6 +55,18 @@ const RouterComponent = (props) => {
             index
             element={<SunspenseWrap><HomePage /></SunspenseWrap>}
           />
+          <Route
+            path={"products"}
+            element={
+                <Outlet />
+            }
+          >
+            <Route
+              index
+              element={<SunspenseWrap><ProductPage /></SunspenseWrap>}
+            />
+            <Route path={":id"} element={<SunspenseWrap ><SingleProductPage /></SunspenseWrap>}/>
+          </Route>
           <Route
             path={"about"}
             element={<SunspenseWrap><AboutPage /></SunspenseWrap>}
@@ -75,14 +91,7 @@ const RouterComponent = (props) => {
             />
           </Route>
           <Route path={"checkout"} element={<PrivateRoute ><Outlet /></PrivateRoute>}>
-            <Route
-              index
-              element={
-                <SunspenseWrap>
-                  <Outlet />
-                </SunspenseWrap>
-              }
-            />
+         
             <Route
               index
               element={

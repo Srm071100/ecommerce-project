@@ -1,0 +1,9 @@
+// These are constants you will use in reducers for setting data
+
+export const GET_PRODUCT_REQUEST = 'GET_PRODUCT_REQUEST';
+export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS';
+export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
+
+export const GET_SINGLE_PRODUCT_REQUEST = 'GET_SINGLE_PRODUCT_REQUEST';
+export const GET_SINGLE_PRODUCT_SUCCESS = 'GET_SINGLE_PRODUCT_SUCCESS';
+export const GET_SINGLE_PRODUCT_ERROR = 'GET_SINGLE_PRODUCT_ERROR';

@@ -1,10 +1,10 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
 
-export const request = async (method, path, requestBody, isAuth, isBlob) => {
+export const request = async (method, url, requestBody, isAuth, isBlob) => {
   let config = {
     method,
-    url: `https://api.escuelajs.co/api/v1/` + path,
+    url
   };
   if (isAuth) {
     const token = Cookies.get("js_user_token");

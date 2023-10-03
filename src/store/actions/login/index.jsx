@@ -16,7 +16,7 @@ import {
 // Users action
 export const loginUser = (data) => async (dispatch) => {
   dispatch({ type: LOGIN_USER_REQUEST });
-  const url = `auth/login`;
+  const url = `https://api.escuelajs.co/api/v1/auth/login`;
   request("post", url, data, false).then(
     (res) => {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: res });
@@ -33,7 +33,7 @@ export const resetLoginUserState = () => async (dispatch) => {
 
 export const registerUser = (data) => async (dispatch) => {
   dispatch({ type: ADD_USER_REQUEST });
-  const url = `users`;
+  const url = `https://api.escuelajs.co/api/v1/users`;
   request("post", url, data, false).then(
     (res) => {
       dispatch({ type: ADD_USER_SUCCESS, payload: res });
