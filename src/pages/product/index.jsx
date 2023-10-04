@@ -32,7 +32,7 @@ const ProductsPage = (props) => {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-          {getProductData && getProductData.length > 0 && getProductData.map((product) => {
+          {getProductData && getProductData.products && getProductData.products.length > 0 && getProductData.products.map((product) => {
                   return(
               <Grid item key={product.id} xs={12} sm={6} md={4}>
               <Link to={"/products/" + product.id}>
@@ -45,11 +45,11 @@ const ProductsPage = (props) => {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image={product.image}
+                    image={product.thumbnail}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                    {product.name}
+                    {product.title}
                     </Typography>
                     <Typography>
                     {product.description}

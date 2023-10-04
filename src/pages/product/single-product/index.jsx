@@ -31,8 +31,8 @@ const SingleProductPage = (props) => {
       cartdata[getSingleProductData.id].qty++
     }else{
       cartdata[getSingleProductData.id] = {
-        name : getSingleProductData.name,
-        image : getSingleProductData.image,
+        name : getSingleProductData.title,
+        image : getSingleProductData.thumbnail,
         price : getSingleProductData.price,
         qty : 1
       }
@@ -49,13 +49,13 @@ const SingleProductPage = (props) => {
     <>{getSingleProductData && getSingleProductData.id && <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2}} marginBottom={"10px"}>
       <Grid item xs={6}>
         <img
-        src={getSingleProductData.image}
-        alt={getSingleProductData.name}
+        src={getSingleProductData.thumbnail}
+        alt={getSingleProductData.title}
       />
       </Grid>
       <Grid item xs={6}>
         <Typography gutterBottom variant="h5" component="h2">
-          {getSingleProductData.name}
+          {getSingleProductData.title}
         </Typography>
         <Typography>
           {getSingleProductData.description}

@@ -12,7 +12,8 @@ import {
 
 export const fetchProductList = () => async (dispatch) => {
   dispatch({ type: GET_PRODUCT_REQUEST });
-  const url = `https://651a5e02340309952f0d2b2d.mockapi.io/api/v1/Products`;
+  // const url = `https://651a5e02340309952f0d2b2d.mockapi.io/api/v1/Products`;
+  const url = `https://dummyjson.com/products/`;
   request("get", url, "", true).then(
     (res) => {
       dispatch({ type: GET_PRODUCT_SUCCESS, payload: res });
@@ -26,7 +27,8 @@ export const fetchProductList = () => async (dispatch) => {
 
 export const fetchSingleProductList = (id) => async (dispatch) => {
   dispatch({ type: GET_SINGLE_PRODUCT_REQUEST });
-  const url = `https://651a5e02340309952f0d2b2d.mockapi.io/api/v1/Products/${id}`;
+  // const url = `https://651a5e02340309952f0d2b2d.mockapi.io/api/v1/Products/${id}`;
+  const url = `https://dummyjson.com/products/${id}`;
   request("get", url, "", true).then(
     (res) => {
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: res });

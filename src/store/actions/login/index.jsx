@@ -47,7 +47,7 @@ export const registerUser = (data) => async (dispatch) => {
 
 export const fetchUserData = (data) => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
-  const url = `auth/profile`;
+  const url = `https://api.escuelajs.co/api/v1/auth/profile`;
   request("get", url, "", true).then(
     (res) => {
       dispatch({ type: GET_USER_SUCCESS, payload: res });
