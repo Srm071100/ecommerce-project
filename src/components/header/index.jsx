@@ -1,6 +1,9 @@
 
 import React from "react";
 import logo from "../../assets/images/logo.png"
+import { Link } from "react-router-dom";
+import routesUrl from "../../routes/routes-url";
+import Cookies from "js-cookie";
 const Header = (props) => {
   return (
     // header section start
@@ -14,22 +17,25 @@ const Header = (props) => {
              <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ml-auto">
                    <li className="nav-item active">
-                      <a className="nav-link" href="index.html">Home</a>
+                      <Link className="nav-link" to={routesUrl.home}>Home</Link>
                    </li>
                    <li className="nav-item">
-                      <a className="nav-link" href="about.html">About Us</a>
+                      <Link className="nav-link" to={routesUrl.about}>About Us</Link>
                    </li>
                    <li className="nav-item">
-                      <a className="nav-link" href="gallery.html">Gallery</a>
+                      <Link className="nav-link" to={routesUrl.product}>Products</Link>
                    </li>
+                   {!Cookies.get("js_user_token") ? 
+                     <li className="nav-item">
+                        <Link className="nav-link" to={routesUrl.login}>Login</Link>
+                     </li> 
+                  :
+                     <li className="nav-item">
+                      <Link className="nav-link" to={routesUrl.profile}>Profile</Link>
+                     </li>
+                  }
                    <li className="nav-item">
-                      <a className="nav-link" href="services.html">Services</a>
-                   </li>
-                   <li className="nav-item">
-                      <a className="nav-link" href="contact.html">Contact Us</a>
-                   </li>
-                   <li className="nav-item">
-                      <a className="nav-link" href="#"><i className="fa fa-search" aria-hidden="true"></i></a>
+                      <Link className="nav-link" to={routesUrl.contactUs}>Contact Us</Link>
                    </li>
                 </ul>
              </div>

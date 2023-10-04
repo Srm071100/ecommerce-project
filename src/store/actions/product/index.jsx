@@ -10,10 +10,10 @@ import {
 } from "./product.types";
 
 
-export const fetchProductList = () => async (dispatch) => {
+export const fetchProductList = (limit = 30) => async (dispatch) => {
   dispatch({ type: GET_PRODUCT_REQUEST });
   // const url = `https://651a5e02340309952f0d2b2d.mockapi.io/api/v1/Products`;
-  const url = `https://dummyjson.com/products/`;
+  const url = `https://dummyjson.com/products/?limit=${limit}`;
   request("get", url, "", true).then(
     (res) => {
       dispatch({ type: GET_PRODUCT_SUCCESS, payload: res });

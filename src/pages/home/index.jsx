@@ -1,5 +1,30 @@
-import React from "react";
+import React,{useEffect} from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { fetchProductList } from "../../store/actions/product";
+import { Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+import routesUrl from "../../routes/routes-url";
+import aboutImage from "../../assets/images/about-img.jpg"
+import icone1 from "../../assets/images/icon1.png"
+import icone2 from "../../assets/images/icon2.png"
+import icone3 from "../../assets/images/icon3.png"
 const HomePage = (props) => {
+   const dispatch = useDispatch();
+  const {
+    getProductLoading,
+    getProductSuccess,
+    getProductError,
+    getProductData
+  } = useSelector((state) => {
+    return state.product;
+  });
+  useEffect(() => {
+    dispatch(fetchProductList(6));
+  },[])
+  console.log(getProductLoading,
+    getProductSuccess,
+    getProductError,
+    getProductData)
   return (
    <>
       <div class="banner_section layout_padding">
@@ -11,9 +36,9 @@ const HomePage = (props) => {
                         <div class="col-sm-12">
                            <div class="banner_taital">
                               <h1 class="outstanding_text">Outstanding</h1>
-                              <h1 class="coffee_text">Coffee Shop</h1>
-                              <p class="there_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, </p>
-                              <div class="learnmore_bt"><a href="#">Learn More</a></div>
+                              <h1 class="coffee_text">Shopping Mart</h1>
+                              <p class="there_text">. During the Big Billion Day Sale, you get offers and discounts on electronics, apparel, furniture and more. Whether you plan to buy a new electronic device for yourself or your family member, you can find mouth-watering offers on your preferred device during Big Billion Days. With deals and offers of up to 80 per cent on certain items, you can rest assured that there will be something for everyone. So, get your shopping lists ready and prepare to get the best gifts for your family and friends.</p>
+                              <div class="learnmore_bt"><Link to={routesUrl.about}>Learn More</Link></div>
                            </div>
                         </div>
                      </div>
@@ -28,13 +53,13 @@ const HomePage = (props) => {
                <div class="col-md-6">
                   <div class="about_taital_main">
                      <div class="about_taital">About Us</div>
-                     <p class="about_text">Full cleaning and housekeeping services for companies and households.</p>
-                     <p class="about_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply</p>
-                     <div class="read_bt"><a href="#">Read More</a></div>
+                     <p class="about_text">We take an active role in sustainability, not only because it’s smart for our business, but because we believe in making the world a better place for future generations. Because of our size, we are in a unique position to foster innovation, advance research and test market-driven solutions.</p>
+                     <p class="about_text">JS Enterprice culture is steeped in fostering trust, inclusion, support, recognition and genuine care that enables Flipsters to create, innovate, and bring their best selves to work</p>
+                     <div class="read_bt"><Link to={routesUrl.about}>Read More</Link></div>
                   </div>
                </div>
                <div class="col-md-6">
-                  <div class="about_img"><img src="images/about-img.png"/></div>
+                  <div class="about_img"><img src={aboutImage}/></div>
                </div>
             </div>
          </div>
@@ -43,101 +68,44 @@ const HomePage = (props) => {
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <h1 class="gallery_taital">Our Gallery</h1>
-                  <p class="gallery_text">Lorem Ipsum is simply dummy text of printing typesetting ststry lorem Ipsum the industry'ndard dummy text ever since of the 1500s, when an unknown printer took a galley of type and scra make a type specimen book. It has</p>
+                  <h1 class="gallery_taital">Our Products</h1>
+                  <p class="gallery_text">When it comes to searching for the best skincare products, it's important to remember that no two people will have the same skin concerns. One might have dry and sensitive skin, while another may suffer from acne and redness—which also means that skincare routines look different for everyone. The good news? There are quite a few products that skincare aficionados and experts return to time and time again to give the skin a targeted plumping, retexturizing, toning, and brightening.</p>
                </div>
             </div>
-            <div class="">
-               <div class="gallery_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-1.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-2.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-3.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="gallery_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-4.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-5.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="overlay">
-                                 <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-6.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="overlay">
-                                 <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="gallery_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-7.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-8.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/img-9.png" alt="Avatar" class="image"/>
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="seemore_bt"><a href="#">See More</a></div>
+            <Grid container spacing={4}>
+               {getProductData && getProductData.products && getProductData.products.length > 0 && getProductData.products.map((product) => {
+                  return(
+                     <Grid item key={product.id} xs={12} sm={6} md={4}>
+                           <Link to={"/products/" + product.id}>
+                              <Card
+                                 sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                              >
+                                 <CardMedia
+                                 component="div"
+                                 sx={{
+                                    // 16:9
+                                    pt: '56.25%',
+                                 }}
+                                 image={product.thumbnail}
+                                 />
+                                 <CardContent sx={{ flexGrow: 1 }}>
+                                 <Typography gutterBottom variant="h5" component="h2">
+                                 {product.title}
+                                 </Typography>
+                                 <Typography>
+                                 {product.description}
+                                 </Typography>
+                                 </CardContent>
+                                 <CardActions>
+                                 Price  :  {product.price} ₹
+                                 </CardActions>
+                              </Card>
+                           </Link>
+                     </Grid>
+                  )
+               })}
+            </Grid>
+            <div class="seemore_bt"><Link to={routesUrl.product}>See More</Link></div>
          </div>
       </div>
       <div class="services_section layout_padding">
@@ -153,34 +121,31 @@ const HomePage = (props) => {
                   <div class="col-lg-4 col-sm-12 col-md-4">
                      <div class="box_main active">
                         <div class="house_icon">
-                           <img src="images/icon1.png" class="image_1"/>
-                           <img src="images/icon1.png" class="image_2"/>
+                           <img src={icone1} class="image_1"/>
+                           <img src={icone1} class="image_2"/>
                         </div>
-                        <h3 class="decorate_text">Original Coffee</h3>
-                        <p class="tation_text">Exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea </p>
-                        <div class="readmore_bt"><a href="#">Read More</a></div>
+                        <h3 class="decorate_text">Free Shipping</h3>
+                        <p class="tation_text">Free shipping with the carefully packaged. </p>
                      </div>
                   </div>
                   <div class="col-lg-4 col-sm-12 col-md-4">
                      <div class="box_main">
                         <div class="house_icon">
-                           <img src="images/icon2.png" class="image_1"/>
-                           <img src="images/icon2.png" class="image_2"/>
+                           <img src={icone2} class="image_1"/>
+                           <img src={icone2} class="image_2"/>
                         </div>
-                        <h3 class="decorate_text">20 Coffee Flavors</h3>
-                        <p class="tation_text">Exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea </p>
-                        <div class="readmore_bt"><a href="#">Read More</a></div>
+                        <h3 class="decorate_text">Fast Delivery</h3>
+                        <p class="tation_text">Within a week we deliver in allover the india</p>
                      </div>
                   </div>
                   <div class="col-lg-4 col-sm-12 col-md-4">
                      <div class="box_main">
                         <div class="house_icon">
-                           <img src="images/icon3.png" class="image_1"/>
-                           <img src="images/icon3.png" class="image_2"/>
+                           <img src={icone3} class="image_1"/>
+                           <img src={icone3} class="image_2"/>
                         </div>
-                        <h3 class="decorate_text">Pleasant Abient</h3>
-                        <p class="tation_text">Exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea </p>
-                        <div class="readmore_bt"><a href="#">Read More</a></div>
+                        <h3 class="decorate_text">Best Price</h3>
+                        <p class="tation_text">We give best offer and price to coustomer</p>
                      </div>
                   </div>
                </div>
