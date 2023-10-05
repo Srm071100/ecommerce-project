@@ -1,7 +1,9 @@
-import { Card ,Grid,Container,Box,Typography,CardMedia,CardActionArea ,CardContent} from "@mui/material";
+import { Card ,Grid,Container,Box,Typography,CardMedia,CardActions ,Button,CardContent} from "@mui/material";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 const ProfilePage = (props) => {
+  const navigate = useNavigate()
   const [userData , setUserData] = useState({});
   useEffect(() => {
     if(Cookies.get("js_user_data")){
@@ -43,6 +45,14 @@ const ProfilePage = (props) => {
                     <Typography>
                     Created Date : {userData.creationAt}
                     </Typography>
+                    <CardActions>
+                     <Button onClick={() => {
+                        Cookies.remove("js_user_data")
+                        Cookies.remove("js_user_token")
+                        navigate("/auth/login")
+                     }}  fullWidth
+                          variant="contained"> Logout </Button>
+                    </CardActions>
                   </CardContent>
                 </Card></Grid></Grid></Container>}
       </>
