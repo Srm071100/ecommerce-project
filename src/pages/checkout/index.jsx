@@ -24,13 +24,12 @@ const CheckoutPage = (props) => {
         <div className="row">
             <div className="col-sm-12">
               <h1 className="gallery_taital">Checkout</h1>
-              <p className="gallery_text">Lorem Ipsum is simply dummy text of printing typesetting ststry lorem Ipsum the industry'ndard dummy text ever since of the 1500s, when an unknown printer took a galley of type and scra make a type specimen book. It has</p>
+              
             </div>
         </div>
         <div id="shopping-cart">
           {cartData && Object.keys(cartData) && Object.keys(cartData).length > 0 ? 
           <>
-            <a id="btnEmpty" >Empty Cart</a>
             <table className="tbl-cart" cellPadding="10" cellSpacing="1">
               <tbody>
                 <tr>

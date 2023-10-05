@@ -25,8 +25,8 @@ const ProductsPage = (props) => {
       <div class="container">
         <div class="row">
             <div class="col-sm-12">
-              <h1 class="gallery_taital">Our Gallery</h1>
-              <p class="gallery_text">Lorem Ipsum is simply dummy text of printing typesetting ststry lorem Ipsum the industry'ndard dummy text ever since of the 1500s, when an unknown printer took a galley of type and scra make a type specimen book. It has</p>
+              <h1 class="gallery_taital">Our Products</h1>
+              <p class="gallery_text">All range of product we have just simmply choose and add to cart with in a week product is deliver to you.</p>
             </div>
         </div>
         <Container sx={{ py: 8 }} maxWidth="md">

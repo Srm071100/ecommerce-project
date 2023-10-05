@@ -10,7 +10,7 @@ const Header = (props) => {
     <div className="header_section">
        <div className="container-fluid">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-             <div className="logo"><a href="index.html"><img src={logo}/></a></div>
+             <div className="logo"><img src={logo} style={{height:"50px"}}/></div>
              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
              <span className="navbar-toggler-icon"></span>
              </button>
@@ -36,6 +36,9 @@ const Header = (props) => {
                   }
                    <li className="nav-item">
                       <Link className="nav-link" to={routesUrl.contactUs}>Contact Us</Link>
+                   </li>
+                   <li className="nav-item">
+                      <Link className="nav-link" to={routesUrl.cart}>Cart</Link>
                    </li>
                 </ul>
              </div>

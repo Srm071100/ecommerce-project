@@ -20,19 +20,37 @@ const CartPage = (props) => {
       setTotal(productTotal)
     }
   },[cartData])
+
+
+  const remove_item_from_cart = (product_id) => {
+      let tempData = { ... cartData}
+      let newData = {}
+      Object.keys(tempData).map((item_id) => {
+        if(product_id != item_id){
+          newData[item_id] = tempData[item_id];
+        }
+      })
+      setCartData(newData);
+      localStorage.setItem("js_cart_data",JSON.stringify(newData))
+  }
+
+  const empty_cart = () => {
+    setCartData({});
+    localStorage.removeItem("js_cart_data")
+  }
   return (
     <div className="gallery_section layout_padding">
       <div className="container">
         <div className="row">
             <div className="col-sm-12">
               <h1 className="gallery_taital">Shopping Cart</h1>
-              <p className="gallery_text">Lorem Ipsum is simply dummy text of printing typesetting ststry lorem Ipsum the industry'ndard dummy text ever since of the 1500s, when an unknown printer took a galley of type and scra make a type specimen book. It has</p>
+             
             </div>
         </div>
         <div id="shopping-cart">
           {cartData && Object.keys(cartData) && Object.keys(cartData).length > 0 ? 
           <>
-            <a id="btnEmpty" >Empty Cart</a>
+            <a id="btnEmpty" onClick={() => empty_cart()}>Empty Cart</a>
             <table className="tbl-cart" cellPadding="10" cellSpacing="1">
               <tbody>
                 <tr>
@@ -51,7 +69,7 @@ const CartPage = (props) => {
                       <td  style={{textAlign:"right"}}>{cartData[product_id].qty}</td>
                       <td style={{textAlign:"right"}}>{cartData[product_id].price} ₹</td>
                       <td  style={{textAlign:"right"}}>{parseFloat(cartData[product_id].price) * cartData[product_id].qty} ₹</td>
-                      <td style={{textAlign:"center"}}><img src={deleteIcon} alt="Remove Item" /></td>
+                      <td style={{textAlign:"center"}}><img src={deleteIcon} alt="Remove Item" onClick={() => remove_item_from_cart(product_id)}/></td>
                     </tr>
                   )
                 })}
@@ -66,10 +84,10 @@ const CartPage = (props) => {
           </> : 
           <div className="no-records">Your Cart is Empty</div>}
         </div>
-        
+        {Object.keys(cartData).length > 0 && 
         <div className="row">
           <Button LinkComponent={Link} to="/checkout" variant="contained">Go To Checkout</Button>
-        </div>
+        </div>}
       </div>
     </div>
   );
